@@ -16,4 +16,8 @@ npm-debug.log
 .idea
 
 # Firebase config
+.firebaserc
+firebase.json
 firebase.config.json
+database.rules.json
+
