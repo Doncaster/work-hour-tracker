@@ -1,0 +1,39 @@
+.loading-spinner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+
+  opacity: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+  pointer-events: none;
+
+  transition: all 1s;
+
+  &.visible {
+    opacity: 100;
+    background: white;
+    pointer-events: all;
+  }
+
+  &:after {
+    content: " ";
+    border: 16px solid rgba(0, 0, 0, 0.1);
+    border-top: 16px solid rgba(0, 0, 0, 0.7);
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 1s ease-in-out infinite;
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

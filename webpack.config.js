@@ -11,7 +11,7 @@ module.exports = {
     entry: {
         favicon: './public/favicon.ico',
         app: './src/index.jsx',
-        vendor: ['react', 'moment', 'firebase', 'lodash']
+        vendor: ['react', 'react-dom', 'react-redux', 'moment', 'firebase', 'lodash', 'redux', 'redux-thunk', 'redux-logger']
     },
     output: {
         path: './build',
@@ -19,7 +19,7 @@ module.exports = {
     },
     module: {
         loaders: [{
-            test: /\.jsx$/,
+            test: /\.(js|jsx)$/,
             exclude: /node_modules/,
             loader: 'babel-loader',
             query: {
@@ -79,7 +79,7 @@ module.exports = {
         }) : [])
     ),
     resolve: {
-        extensions: ['.webpack.js', '.web.js', '.js', '/index.jsx', '']
+        extensions: ['.webpack.js', '.web.js', '.js', '.jsx', '/index.jsx', '/index.js', '']
     },
     devServer: {
         port: 3001,

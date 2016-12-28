@@ -1,7 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
+import {createStore, applyMiddleware} from 'redux';
+import {Provider} from 'react-redux';
+import ThunkMiddleware from 'redux-thunk';
+import createLogger from 'redux-logger';
+
 import Firebase from 'firebase/app';
-import App from './Components/App';
+
+import HourTrackerApp from './Reducers';
+import {fetchUserInfo} from './Actions';
+
+import UserAwareApp from './Containers/UserAwareApp';
 import './index.less';
 
 const firebaseConfig = {
@@ -14,7 +24,13 @@ const firebaseConfig = {
 
 Firebase.initializeApp(firebaseConfig);
 
+const store = createStore(HourTrackerApp, applyMiddleware(ThunkMiddleware, createLogger()));
+
 ReactDOM.render(
-  <App />,
-  document.getElementById('root')
+    <Provider store={store}>
+        <UserAwareApp />
+    </Provider>,
+    document.getElementById('root')
 );
+
+store.dispatch(fetchUserInfo());
