@@ -12,7 +12,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 class App extends React.Component {
 
     render() {
-        const content = this.props.uid ? <AuthorizedView uid={this.props.uid}/> : <UnauthorizedView/>;
+        const content = this.props.uid ? <AuthorizedView {...this.props}/> : <UnauthorizedView {...this.props}/>;
 
         return (
             <div className="App">

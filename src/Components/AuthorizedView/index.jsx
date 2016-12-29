@@ -1,36 +1,21 @@
 import React from "react";
 
-import Summary from '../Summary';
+import FilteredSummary from '../../Containers/FilteredSummary';
 import ReportSheet from '../ReportSheet';
 
 import './AuthorizedView.less';
 
-const SUMMARY_VIEW = "SUMMARY";
-const REPORT_VIEW = "REPORT";
+import {VIEWS} from '../../Constants';
 
 class AuthorizedView extends React.Component {
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            view: SUMMARY_VIEW
-        };
-    }
-
-    _show = view => this.setState({view})
-
-    _getTabClickHandlerFor = view => {
-        return () => this.setState({view});
-    }
-
-    _getTabClass = view => this.state.view === view ? "active" : null
+    _getTabClass = view => this.props.currentView === view ? "active" : null
 
     _getView = viewName => {
         switch(viewName) {
-            case SUMMARY_VIEW:
-                return <Summary {...this.props} />;
-            case REPORT_VIEW:
+            case VIEWS.SUMMARY:
+                return <FilteredSummary />;
+            case VIEWS.REPORT:
                 return <ReportSheet {...this.props} />;
             default:
                 return <div>Error occurred</div>;
@@ -41,11 +26,11 @@ class AuthorizedView extends React.Component {
         return (
             <div>
                 <ul className="main-tabs">
-                    <li className={this._getTabClass(SUMMARY_VIEW)} onClick={this._getTabClickHandlerFor(SUMMARY_VIEW)}>Summary</li>
-                    <li className={this._getTabClass(REPORT_VIEW)} onClick={this._getTabClickHandlerFor(REPORT_VIEW)}>Report</li>
+                    <li className={this._getTabClass(VIEWS.SUMMARY)} onClick={() => this.props.onTabClicked(VIEWS.SUMMARY)}>Summary</li>
+                    <li className={this._getTabClass(VIEWS.REPORT)} onClick={() => this.props.onTabClicked(VIEWS.REPORT)}>Report</li>
                 </ul>
-                <div className="container">
-                    {this._getView(this.state.view)}
+                <div className="container bottom-padding">
+                    {this._getView(this.props.currentView)}
                 </div>
             </div>
         );
