@@ -15,7 +15,7 @@ module.exports = {
     },
     output: {
         path: './build',
-        filename: 'js/[name].bundle.js'
+        filename: 'js/[name].[hash].bundle.js'
     },
     module: {
         loaders: [{
@@ -60,7 +60,7 @@ module.exports = {
             inject: 'body',
             excludeChunks: ['favicon']
         }),
-        new Webpack.optimize.CommonsChunkPlugin('vendor', 'js/vendor.bundle.js'),
+        new Webpack.optimize.CommonsChunkPlugin('vendor', 'js/vendor.[hash].bundle.js'),
         new Webpack.DefinePlugin({
             FIREBASE_API_KEY: JSON.stringify(firebaseConfig.apiKey),
             FIREBASE_AUTH_DOMAIN: JSON.stringify(firebaseConfig.authDomain),
