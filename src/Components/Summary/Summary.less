@@ -1,0 +1,17 @@
+.mobile-column {
+  display: none;
+}
+
+@media(max-width: 470px) {
+  .mobile-column {
+    display: table-cell;
+  }
+  .non-mobile-column {
+    display: none;
+  }
+
+  .summary-table th,
+  .summary-table td {
+    vertical-align: middle !important;
+  }
+}

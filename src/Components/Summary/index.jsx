@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './Summary.less';
+
 class Summary extends React.Component {
     _getHoursList = () => {
         const listItems = this.props.timeSheets.map(hour =>
@@ -8,9 +10,13 @@ class Summary extends React.Component {
                 key={hour.id}
                 onClick={() => this.props.onRowClicked(hour.id)}
             >
-                <td>{hour.start.format('dd DD.MM.YYYY')}</td>
-                <td>{hour.start.format('HH:mm')}</td>
-                <td>{hour.end.format('HH:mm')}</td>
+                <td className="mobile-column">
+                    {hour.start.format('dd DD.MM.YYYY')}<br/>
+                    {hour.start.format('HH:mm')}-{hour.end.format('HH:mm')}
+                </td>
+                <td className="non-mobile-column">{hour.start.format('dd DD.MM.YYYY')}</td>
+                <td className="non-mobile-column">{hour.start.format('HH:mm')}</td>
+                <td className="non-mobile-column">{hour.end.format('HH:mm')}</td>
                 <td>{hour.outOfOffice > 0 && <span>{hour.outOfOffice}{' '}min</span>}</td>
                 <td>{hour.difference}{' '}min</td>
                 <td>{hour.selected &&
@@ -22,12 +28,13 @@ class Summary extends React.Component {
         );
 
         return (
-            <table className='table table-striped table-hover'>
+            <table className='summary-table table table-striped table-hover'>
                 <thead>
                 <tr>
-                    <th>Date</th>
-                    <th>Start</th>
-                    <th>End</th>
+                    <th className="mobile-column">Time</th>
+                    <th className="non-mobile-column">Date</th>
+                    <th className="non-mobile-column">Start</th>
+                    <th className="non-mobile-column">End</th>
                     <th>Out of office</th>
                     <th colSpan="2">Difference</th>
                 </tr>

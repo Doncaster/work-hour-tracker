@@ -1,7 +1,6 @@
 import {combineReducers} from 'redux';
 import {timeSheets} from './timeSheets';
 import {uid} from './userInfo';
-import {VIEWS} from '../Constants';
 import {CHANGE_VIEW, REPORT_FORM_CHANGED, CLEAR_REPORT_FORM} from '../Actions';
 
 let onGoingRequests = 0;
@@ -16,7 +15,7 @@ const isLoading = (state = false, action) => {
     }
 }
 
-const currentView = (state = VIEWS.SUMMARY, action) => {
+const currentView = (state = null, action) => {
     switch (action.type) {
         case CHANGE_VIEW:
             return action.view;
