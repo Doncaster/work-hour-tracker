@@ -50,13 +50,15 @@ export const fetchUserInfo = () => (dispatch, getState) => {
 export const fetchTimeSheets = () => (dispatch, getState) => {
     dispatch(createAsyncAction(REQUEST_TIME_SHEETS));
 
-    return FirebaseDB().ref('hours/' + getState().uid).once('value').then(snapshot => dispatch(
+    const databaseRef = FirebaseDB().ref('hours/' + getState().uid);
+
+    return databaseRef.once('value').then(snapshot => dispatch(
         createAsyncAction(REQUEST_TIME_SHEETS, REQUEST_STATUS.SUCCESS, {
             timeSheets: snapshot.val()
         })
     )).catch(error => dispatch(
         createAsyncAction(REQUEST_TIME_SHEETS, REQUEST_STATUS.ERROR, {error})
-    ));
+    )).then(() => databaseRef.off());
 }
 
 export const removeTimeSheet = key => (dispatch, getState) => {
@@ -104,12 +106,13 @@ export const saveReportForm = timeSheet => (dispatch, getState) => {
 
     dispatch(createAsyncAction(SAVE_REPORT_FORM));
 
-    databaseRef.push().set(timeSheet).then(() => {
-        dispatch(
-            createAsyncAction(SAVE_REPORT_FORM, REQUEST_STATUS.SUCCESS)
-        );
+    return databaseRef.push().set(timeSheet).then(() => {
+        dispatch(createAsyncAction(SAVE_REPORT_FORM, REQUEST_STATUS.SUCCESS));
+        databaseRef.off();
         dispatch(clearReportForm());
         dispatch(fetchTimeSheets(getState().uid));
-    }).catch(error => dispatch(createAsyncAction(SAVE_REPORT_FORM, REQUEST_STATUS.ERROR, {error}))
-    ).then(() => databaseRef.off());
+    }).catch(error => {
+        dispatch(createAsyncAction(SAVE_REPORT_FORM, REQUEST_STATUS.ERROR, {error}));
+        databaseRef.off();
+    });
 }
