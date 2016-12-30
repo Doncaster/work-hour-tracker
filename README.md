@@ -1,5 +1,7 @@
 ### Work hour tracker
 
+```
 npm run start
-npm run build
-
+npm run build [-- --prod]
+``
+`
