@@ -1,13 +1,15 @@
 import FirebaseAuth from 'firebase/auth';
 import FirebaseDB from 'firebase/database';
 
-export const ADD_TIME_SHEET = 'ADD_TIME_SHEET';
 export const REQUEST_TIME_SHEETS = 'REQUEST_TIME_SHEETS';
 export const CLEAR_TIME_SHEETS = 'CLEAR_TIME_SHEETS';
 export const REMOVE_TIME_SHEET = 'REMOVE_TIME_SHEET';
 export const TOGGLE_SELECTED_TIME_SHEET = 'TOGGLE_SELECTED_TIME_SHEET';
 export const REQUEST_USER_INFO = 'REQUEST_USER_INFO';
 export const CHANGE_VIEW = 'CHANGE_VIEW';
+export const REPORT_FORM_CHANGED = 'REPORT_FORM_CHANGED';
+export const CLEAR_REPORT_FORM = 'CLEAR_REPORT_FORM';
+export const SAVE_REPORT_FORM = 'SAVE_REPORT_FORM';
 
 export const REQUEST_STATUS = {
     SUCCESS: 'success',
@@ -19,14 +21,6 @@ const createAsyncAction = (type, status, parameters) => {
         type,
         async: true,
         status}, parameters);
-}
-
-
-export const addTimeSheet = (userInfo, startTime, endTime, outOfOffice, isWorkingDay) => {
-    return {
-        type: ADD_TIME_SHEET,
-        status: 'success'
-    }
 }
 
 export const changeView = (view) => {
@@ -46,17 +40,17 @@ export const fetchUserInfo = () => (dispatch, getState) => {
                 REQUEST_STATUS.SUCCESS,
                 {uid: result.user ? result.user.uid : null}));
 
-        dispatch(getState().uid ? fetchTimeSheets(getState().uid) : clearTimeSheets());
+        dispatch(getState().uid ? fetchTimeSheets() : clearTimeSheets());
     }).catch(error => {
         dispatch(createAsyncAction(REQUEST_USER_INFO, REQUEST_STATUS.ERROR, {error}));
         dispatch(clearTimeSheets());
     });
 }
 
-export const fetchTimeSheets = uid => dispatch => {
+export const fetchTimeSheets = () => (dispatch, getState) => {
     dispatch(createAsyncAction(REQUEST_TIME_SHEETS));
 
-    return FirebaseDB().ref('hours/' + uid).once('value').then(snapshot => dispatch(
+    return FirebaseDB().ref('hours/' + getState().uid).once('value').then(snapshot => dispatch(
         createAsyncAction(REQUEST_TIME_SHEETS, REQUEST_STATUS.SUCCESS, {
             timeSheets: snapshot.val()
         })
@@ -90,3 +84,32 @@ export const toggleSelectedTimeSheet = key => {
     }
 }
 
+export const reportFormChanged = (field, value) => {
+    return {
+        type: REPORT_FORM_CHANGED,
+        field,
+        value
+    }
+}
+
+export const clearReportForm = () => {
+    return {
+        type: CLEAR_REPORT_FORM
+    }
+}
+
+export const saveReportForm = timeSheet => (dispatch, getState) => {
+
+    const databaseRef = FirebaseDB().ref('hours/' + getState().uid);
+
+    dispatch(createAsyncAction(SAVE_REPORT_FORM));
+
+    databaseRef.push().set(timeSheet).then(() => {
+        dispatch(
+            createAsyncAction(SAVE_REPORT_FORM, REQUEST_STATUS.SUCCESS)
+        );
+        dispatch(clearReportForm());
+        dispatch(fetchTimeSheets(getState().uid));
+    }).catch(error => dispatch(createAsyncAction(SAVE_REPORT_FORM, REQUEST_STATUS.ERROR, {error}))
+    ).then(() => databaseRef.off());
+}

@@ -1,7 +1,7 @@
 import React from "react";
 
 import FilteredSummary from '../../Containers/FilteredSummary';
-import ReportSheet from '../ReportSheet';
+import ValidatedReportSheet from '../../Containers/ValidatedReportSheet';
 
 import './AuthorizedView.less';
 
@@ -16,7 +16,7 @@ class AuthorizedView extends React.Component {
             case VIEWS.SUMMARY:
                 return <FilteredSummary />;
             case VIEWS.REPORT:
-                return <ReportSheet {...this.props} />;
+                return <ValidatedReportSheet />;
             default:
                 return <div>Error occurred</div>;
         }

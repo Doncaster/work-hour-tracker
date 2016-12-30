@@ -2,7 +2,7 @@ import {combineReducers} from 'redux';
 import {timeSheets} from './timeSheets';
 import {uid} from './userInfo';
 import {VIEWS} from '../Constants';
-import {CHANGE_VIEW} from '../Actions';
+import {CHANGE_VIEW, REPORT_FORM_CHANGED, CLEAR_REPORT_FORM} from '../Actions';
 
 let onGoingRequests = 0;
 
@@ -24,11 +24,23 @@ const currentView = (state = VIEWS.SUMMARY, action) => {
     }
 }
 
+const reportForm = (state = {}, action) => {
+    switch (action.type) {
+        case REPORT_FORM_CHANGED:
+            return Object.assign({}, state, {[action.field]: action.value})
+        case CLEAR_REPORT_FORM:
+            return {};
+        default:
+            return state;
+    }
+}
+
 const hourTrackerApp = combineReducers({
     uid,
     isLoading,
     currentView,
-    timeSheets
+    timeSheets,
+    reportForm
 });
 
 export default hourTrackerApp;

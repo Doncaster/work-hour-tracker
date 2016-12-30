@@ -1,10 +1,10 @@
 import React from 'react';
-import classNames from 'classNames';
+import classnames from 'classnames';
 
 import './LoadingSpinner.less';
 
 const LoadingSpinner = ({visible}) => {
-    const classes = classNames('loading-spinner', {visible});
+    const classes = classnames('loading-spinner', {visible});
 
     return (
         <div className={classes}></div>
