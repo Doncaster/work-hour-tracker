@@ -7,7 +7,12 @@ class AuthorizedView extends React.Component {
 
     render() {
         const views = _map(this.props.views, (view, key) =>
-            <li className={this.props.currentView === key ? 'active' : null} onClick={() => this.props.onTabClicked(key)}>{key}</li>)
+            <li
+                key={key}
+                className={this.props.currentView === key ? 'active' : null}
+                onClick={() => this.props.onTabClicked(key)}>
+                {key}
+            </li>)
         return (
             <div>
                 <ul className="main-tabs">

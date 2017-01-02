@@ -7,7 +7,6 @@ let onGoingRequests = 0;
 
 const isLoading = (state = false, action) => {
     if (action.async) {
-        console.log('async action', onGoingRequests);
         !action.status ? onGoingRequests++ : onGoingRequests--;
         return onGoingRequests !== 0;
     } else {

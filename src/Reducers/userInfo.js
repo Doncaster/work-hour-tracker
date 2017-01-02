@@ -12,7 +12,6 @@ const handleUserInfoRequest = (status, uid, error) => {
 }
 
 export const uid = (state = null, action) => {
-    console.log(state, action);
     switch (action.type) {
         case REQUEST_USER_INFO:
             return handleUserInfoRequest(action.status, action.uid, action.error);

@@ -24,7 +24,9 @@ const firebaseConfig = {
 
 Firebase.initializeApp(firebaseConfig);
 
-const store = createStore(HourTrackerApp, applyMiddleware(ThunkMiddleware, createLogger()));
+const middlewares = [ThunkMiddleware].concat(process.env.NODE_ENV !== 'production' ? createLogger() : []);
+
+const store = createStore(HourTrackerApp, applyMiddleware(...middlewares));
 
 ReactDOM.render(
     <Provider store={store}>

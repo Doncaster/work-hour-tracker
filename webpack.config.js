@@ -69,7 +69,7 @@ module.exports = {
             FIREBASE_MESSAGING_SENDER_ID: JSON.stringify(firebaseConfig.messagingSenderId),
 
             'process.env': {
-                NODE_ENV: (argv.prod ? JSON.stringify('production') : null)
+                NODE_ENV: argv.prod ? JSON.stringify('production') : null
             }
         })
     ], (argv.prod ? new Webpack.optimize.UglifyJsPlugin({

@@ -16,11 +16,9 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
     return {
-        onTabClicked: (view) => {
-            dispatch(changeView(view));
-        }
+        onTabClicked: view => dispatch(changeView(view))
     }
 }
 

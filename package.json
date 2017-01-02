@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "webpack",
-    "start": "./node_modules/.bin/webpack-dev-server --hot"
+    "build": "rm -rf build && webpack",
+    "start": "webpack-dev-server --hot"
   },
   "devDependencies": {
     "babel-core": "^6.21.0",
