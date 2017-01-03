@@ -9,8 +9,6 @@ import logo from './logo.svg';
 import './App.less';
 import './bootstrap.less';
 
-
-
 class App extends React.Component {
 
     render() {
