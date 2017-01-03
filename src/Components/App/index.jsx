@@ -5,9 +5,11 @@ import UnauthorizedView from '../UnauthorizedView';
 import LoadingSpinner from '../LoadingSpinner';
 
 import logo from './logo.svg';
-import './App.less';
 
-import 'bootstrap/dist/css/bootstrap.min.css'
+import './App.less';
+import './bootstrap.less';
+
+
 
 class App extends React.Component {
 

@@ -18,7 +18,7 @@ class AuthorizedView extends React.Component {
                 <ul className="main-tabs">
                     {views}
                 </ul>
-                <div className="container bottom-padding">
+                <div className="container">
                     {React.createElement(this.props.views[this.props.currentView])}
                 </div>
             </div>
