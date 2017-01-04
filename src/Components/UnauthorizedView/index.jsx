@@ -1,11 +1,11 @@
 import React from "react";
-import FirebaseAuth from 'firebase/auth';
+import Firebase from 'firebase';
 import './UnauthorizedView.less';
 
 class UnauthorizedView extends React.Component {
 
     _onLogin = () => {
-        FirebaseAuth().signInWithRedirect(new FirebaseAuth.GoogleAuthProvider());
+        Firebase.auth().signInWithRedirect(new Firebase.auth.GoogleAuthProvider());
     }
 
     render() {
