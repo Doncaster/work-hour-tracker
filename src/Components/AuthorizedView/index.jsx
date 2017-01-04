@@ -19,7 +19,7 @@ class AuthorizedView extends React.Component {
                     {views}
                 </ul>
                 <div className="container">
-                    {React.createElement(this.props.views[this.props.currentView])}
+                    {(this.props.currentView && this.props.currentView.length > 0) && React.createElement(this.props.views[this.props.currentView])}
                 </div>
             </div>
         );

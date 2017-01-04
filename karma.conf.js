@@ -36,5 +36,5 @@ module.exports = function(config) {
     browserConsoleLogOptions: {
       terminal: true
     }
-  })
+  });
 };
