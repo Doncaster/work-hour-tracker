@@ -1,5 +1,4 @@
-import FirebaseAuth from 'firebase/auth';
-import FirebaseDB from 'firebase/database';
+import Firebase from 'firebase/app';
 
 export const REQUEST_TIME_SHEETS = 'REQUEST_TIME_SHEETS';
 export const CLEAR_TIME_SHEETS = 'CLEAR_TIME_SHEETS';
@@ -33,7 +32,7 @@ export const changeView = (view) => {
 export const fetchUserInfo = () => (dispatch, getState) => {
     dispatch(createAsyncAction(REQUEST_USER_INFO));
 
-    return FirebaseAuth().getRedirectResult().then(result => {
+    return Firebase.auth().getRedirectResult().then(result => {
         dispatch(
             createAsyncAction(
                 REQUEST_USER_INFO,
@@ -50,7 +49,7 @@ export const fetchUserInfo = () => (dispatch, getState) => {
 export const fetchTimeSheets = () => (dispatch, getState) => {
     dispatch(createAsyncAction(REQUEST_TIME_SHEETS));
 
-    const databaseRef = FirebaseDB().ref('hours/' + getState().uid);
+    const databaseRef = Firebase.database().ref('hours/' + getState().uid);
 
     return databaseRef.once('value').then(snapshot => dispatch(
         createAsyncAction(REQUEST_TIME_SHEETS, REQUEST_STATUS.SUCCESS, {
@@ -64,7 +63,7 @@ export const fetchTimeSheets = () => (dispatch, getState) => {
 export const removeTimeSheet = key => (dispatch, getState) => {
     dispatch(createAsyncAction(REMOVE_TIME_SHEET));
 
-    const databaseRef = FirebaseDB().ref(`hours/${getState().uid}/${key}`);
+    const databaseRef = Firebase.database().ref(`hours/${getState().uid}/${key}`);
 
     return databaseRef.remove().then(() => dispatch(
         createAsyncAction(REMOVE_TIME_SHEET, REQUEST_STATUS.SUCCESS, {key})
@@ -102,7 +101,7 @@ export const clearReportForm = () => {
 
 export const saveReportForm = timeSheet => (dispatch, getState) => {
 
-    const databaseRef = FirebaseDB().ref('hours/' + getState().uid);
+    const databaseRef = Firebase.database().ref('hours/' + getState().uid);
 
     dispatch(createAsyncAction(SAVE_REPORT_FORM));
 

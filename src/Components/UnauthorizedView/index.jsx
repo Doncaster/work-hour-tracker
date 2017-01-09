@@ -1,5 +1,5 @@
 import React from "react";
-import Firebase from 'firebase';
+import Firebase from 'firebase/app';
 import './UnauthorizedView.less';
 
 class UnauthorizedView extends React.Component {
