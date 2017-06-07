@@ -1,7 +1,8 @@
 import _map from 'lodash/map';
 import _sortBy from 'lodash/sortBy';
 
-import {REQUEST_TIME_SHEETS, CLEAR_TIME_SHEETS, TOGGLE_SELECTED_TIME_SHEET, REMOVE_TIME_SHEET, REQUEST_STATUS} from '../Actions';
+import { CLEAR_TIME_SHEETS, TOGGLE_SELECTED_TIME_SHEET } from '../Actions';
+import { REQUEST_TIME_SHEETS, REQUEST_STATUS, REMOVE_TIME_SHEET } from '../Actions/Async';
 
 const parseTimeSheets = (timeSheets) =>
     _sortBy(
