@@ -13,7 +13,7 @@ module.exports = {
         app: './src/index.jsx',
         vendor: [
             'react', 'react-dom', 'react-redux', 'moment', 'firebase', 'lodash',
-            'redux', 'redux-thunk', 'redux-logger', 'babel-polyfill']
+            'redux', 'redux-saga', 'redux-logger', 'babel-polyfill']
     },
     output: {
         path: './build',
