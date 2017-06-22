@@ -31,7 +31,6 @@
     "redux": "^3.6.0",
     "redux-logger": "^2.7.4",
     "redux-mock-store": "^1.2.1",
-    "redux-thunk": "^2.1.0",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
     "webpack": "1.14.0",
@@ -39,11 +38,13 @@
     "yargs": "^6.5.0"
   },
   "dependencies": {
+    "babel-polyfill": "^6.23.0",
     "bootstrap": "^3.3.7",
     "firebase": "^3.6.3",
     "lodash": "^4.17.2",
     "moment": "^2.17.1",
     "react": "^15.4.1",
-    "react-dom": "^15.4.1"
+    "react-dom": "^15.4.1",
+    "redux-saga": "^0.15.3"
   }
 }

@@ -3,15 +3,17 @@ import ReactDOM from 'react-dom';
 
 import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
-import ThunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
+import createSagaMiddleware from 'redux-saga';
 
 import Firebase from 'firebase/app';
 
 import HourTrackerApp from './Reducers';
 import {fetchUserInfo} from './Actions';
+import sagas from './Actions/Sagas';
 
 import UserAwareApp from './Containers/UserAwareApp';
+
 import './index.less';
 
 const firebaseConfig = {
@@ -24,9 +26,19 @@ const firebaseConfig = {
 
 Firebase.initializeApp(firebaseConfig);
 
-const middlewares = [ThunkMiddleware].concat(process.env.NODE_ENV !== 'production' ? createLogger() : []);
+const sagaMiddleware = createSagaMiddleware();
+
+const middlewares = [];
+
+if (process.env.NODE_ENV !== 'production') {
+    middlewares.push(createLogger());
+}
+
+middlewares.push(sagaMiddleware);
 
 const store = createStore(HourTrackerApp, applyMiddleware(...middlewares));
+
+sagaMiddleware.run(sagas, store.getState);
 
 ReactDOM.render(
     <Provider store={store}>

@@ -1,4 +1,4 @@
-import {REQUEST_USER_INFO, REQUEST_STATUS} from '../Actions';
+import {REQUEST_USER_INFO, REQUEST_STATUS} from '../Actions/Async';
 
 const handleUserInfoRequest = (status, uid, error) => {
     switch (status) {
