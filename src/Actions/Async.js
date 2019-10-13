@@ -2,6 +2,7 @@ export const REQUEST_USER_INFO = 'REQUEST_USER_INFO';
 export const REQUEST_TIME_SHEETS = 'REQUEST_TIME_SHEETS';
 export const REMOVE_TIME_SHEET = 'REMOVE_TIME_SHEET';
 export const SAVE_REPORT_FORM = 'SAVE_REPORT_FORM';
+export const PUNCH_TIME = 'PUNCH_TIME';
 
 export const REQUEST_STATUS = {
     SUCCESS: 'success',
@@ -19,10 +20,12 @@ const requestUserInfo = (status, parameters) => createAsyncAction(REQUEST_USER_I
 const requestTimeSheets = (status, parameters) => createAsyncAction(REQUEST_TIME_SHEETS, status, parameters);
 const requestTimeSheetRemoval = (status, parameters) => createAsyncAction(REMOVE_TIME_SHEET, status, parameters);
 const requestReportFormSave = (status, parameters) => createAsyncAction(SAVE_REPORT_FORM, status, parameters);
+const requestPunchTime = (status) => createAsyncAction(PUNCH_TIME, status);
 
 export default {
     requestUserInfo,
     requestTimeSheets,
     requestTimeSheetRemoval,
-    requestReportFormSave
+    requestReportFormSave,
+    requestPunchTime
 };

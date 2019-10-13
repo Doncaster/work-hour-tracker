@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import App from '../../Components/App';
-import {changeView} from '../../Actions';
+import {changeView, punchTime} from '../../Actions';
 import FilteredSummary from '../FilteredSummary';
 import ValidatedReportSheet from '../ValidatedReportSheet';
 
@@ -18,7 +18,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onTabClicked: view => dispatch(changeView(view))
+        onTabClicked: view => dispatch(changeView(view)),
+        onPunch: () => dispatch(punchTime())
     }
 }
 

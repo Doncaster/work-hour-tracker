@@ -21,6 +21,8 @@ export const removeTimeSheet = key => Async.requestTimeSheetRemoval(undefined, {
 
 export const saveReportForm = timesheet => Async.requestReportFormSave(undefined, {timesheet});
 
+export const punchTime = () => Async.requestPunchTime();
+
 export const clearTimeSheets = () => {
     return {
         type: CLEAR_TIME_SHEETS
@@ -47,4 +49,3 @@ export const clearReportForm = () => {
         type: CLEAR_REPORT_FORM
     }
 }
-

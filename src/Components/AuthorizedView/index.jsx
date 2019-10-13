@@ -15,6 +15,7 @@ class AuthorizedView extends React.Component {
             </li>)
         return (
             <div>
+                <button onClick={this.props.onPunch} className="btn btn-default punch-button">Punch</button>
                 <ul className="main-tabs">
                     {views}
                 </ul>
