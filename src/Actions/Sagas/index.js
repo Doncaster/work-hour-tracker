@@ -74,14 +74,14 @@ function* punchTime(getState, action) {
             const newHoursRef = hoursDbRef.push();
             yield apply(newHoursRef, newHoursRef.set, [{
                 startTime: punch.start,
-                endTime: Date.now(),
+                endTime: (new Date()).toJSON(),
                 outOfOffice: 0,
                 target: 0
             }]);
 
             yield apply(punchDbRef, punchDbRef.set, [{start: null}]);
         } else {
-            yield apply(punchDbRef, punchDbRef.set, [{start: Date.now()}]);
+            yield apply(punchDbRef, punchDbRef.set, [{start: (new Date()).toJSON()}]);
         }
         punchDbRef.off();
         hoursDbRef.off();

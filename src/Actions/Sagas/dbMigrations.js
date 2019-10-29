@@ -15,4 +15,18 @@ function* moveHours(uid) {
     newHoursRef.off();
 }
 
-export default [moveHours];
+function* switchFromTimestampToJsonTime(uid) {
+    const hoursRef = Firebase.database().ref(`${uid}/hours`);
+    const hoursSnapshot = yield apply(hoursRef, hoursRef.once, ['value']);
+    const hours = hoursSnapshot.val();
+
+    for (let key in hours) {
+        hours[key].endTime = new Date(hours[key].endTime).toJSON();
+        hours[key].startTime = new Date(hours[key].startTime).toJSON();
+    }
+
+    yield apply(hoursRef, hoursRef.set, [hours]);
+    hoursRef.off();
+}
+
+export default [moveHours, switchFromTimestampToJsonTime];

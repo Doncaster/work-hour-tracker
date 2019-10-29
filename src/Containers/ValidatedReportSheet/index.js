@@ -83,8 +83,8 @@ const mapStateToProps = (state) => {
             isValid(state.reportForm.outOfOffice, NUMBER_REGEX) &&
             state.reportForm.workingDay),
         _timeSheet: {
-            startTime: Moment(`${state.reportForm.date} ${state.reportForm.startTime}`, 'YYYY/M/D H:mm').valueOf(),
-            endTime: Moment(`${state.reportForm.date} ${state.reportForm.endTime}`, 'YYYY/M/D H:mm').valueOf(),
+            startTime: Moment(`${state.reportForm.date} ${state.reportForm.startTime}`, 'YYYY/M/D H:mm').toJSON(),
+            endTime: Moment(`${state.reportForm.date} ${state.reportForm.endTime}`, 'YYYY/M/D H:mm').toJSON(),
             outOfOffice: convertToNumber(state.reportForm.outOfOffice),
             target: state.reportForm.workingDay === 'true' ? getWorkingDayLength(state.reportForm.date) : 0
         }
