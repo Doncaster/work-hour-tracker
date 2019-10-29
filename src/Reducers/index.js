@@ -1,7 +1,8 @@
 import {combineReducers} from 'redux';
 import {timeSheets} from './timeSheets';
 import {uid} from './userInfo';
-import {CHANGE_VIEW, REPORT_FORM_CHANGED, CLEAR_REPORT_FORM} from '../Actions';
+import {CHANGE_VIEW, REPORT_FORM_CHANGED, CLEAR_REPORT_FORM, CHANGE_REPORT_TIMEFRAME} from '../Actions';
+import {REPORT_TIMEFRAME_SELECTIONS} from '../constants';
 
 let onGoingRequests = 0;
 
@@ -34,12 +35,22 @@ const reportForm = (state = {}, action) => {
     }
 }
 
+const reportTimeframe = (state = REPORT_TIMEFRAME_SELECTIONS.ONE_MONTH, action) => {
+    switch (action.type) {
+        case CHANGE_REPORT_TIMEFRAME:
+            return action.value;
+        default:
+            return state;
+    }
+}
+
 const hourTrackerApp = combineReducers({
     uid,
     isLoading,
     currentView,
     timeSheets,
-    reportForm
+    reportForm,
+    reportTimeframe
 });
 
 export default hourTrackerApp;

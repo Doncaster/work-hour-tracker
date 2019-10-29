@@ -5,6 +5,7 @@ export const TOGGLE_SELECTED_TIME_SHEET = 'TOGGLE_SELECTED_TIME_SHEET';
 export const CHANGE_VIEW = 'CHANGE_VIEW';
 export const REPORT_FORM_CHANGED = 'REPORT_FORM_CHANGED';
 export const CLEAR_REPORT_FORM = 'CLEAR_REPORT_FORM';
+export const CHANGE_REPORT_TIMEFRAME = 'CHANGE_REPORT_TIMEFRAME';
 
 export const changeView = (view) => {
     return {

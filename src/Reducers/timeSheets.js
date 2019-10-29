@@ -1,13 +1,15 @@
-import _map from 'lodash/map';
-import _sortBy from 'lodash/sortBy';
-
 import { CLEAR_TIME_SHEETS, TOGGLE_SELECTED_TIME_SHEET } from '../Actions';
 import { REQUEST_TIME_SHEETS, REQUEST_STATUS, REMOVE_TIME_SHEET } from '../Actions/Async';
 
-const parseTimeSheets = (timeSheets) =>
-    _sortBy(
-        _map(timeSheets, (current, key) => Object.assign({}, current, {key})),
-        current => current.startTime);
+const parseTimeSheets = timeSheets =>
+    Object
+        .keys(timeSheets)
+        .reduce(
+            (acc, key) => acc.concat(Object.assign({}, timeSheets[key], {key})),
+            []
+        )
+        .sort((a, b) => a < b)
+        .reverse();
 
 const timeSheet =(state = {}, action) => {
     switch (action.type) {
@@ -48,5 +50,3 @@ export const timeSheets = (state = [], action) => {
             return state;
     }
 }
-
-

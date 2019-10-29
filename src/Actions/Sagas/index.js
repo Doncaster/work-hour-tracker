@@ -1,10 +1,17 @@
 import Firebase from 'firebase/app';
 import { all, apply, put, takeEvery, takeLatest } from 'redux-saga/effects';
+import Moment from 'moment';
 import Async, {
     REQUEST_STATUS, REQUEST_USER_INFO, REQUEST_TIME_SHEETS,
     REMOVE_TIME_SHEET, SAVE_REPORT_FORM, PUNCH_TIME } from '../Async';
 import { clearTimeSheets, clearReportForm } from '../index';
 import dbMigrations from './dbMigrations';
+
+const TIMEFRAME_LENGTH = {
+    ONE_MONTH: 30,
+    SIX_MONTHS: 180,
+    ONE_YEAR: 365
+}
 
 function* fetchUserInfo() {
     try {
@@ -20,8 +27,17 @@ function* fetchUserInfo() {
 
 function* fetchTimeSheets(getState) {
     yield checkDbMigrations(getState().uid);
+    const timeframe = getState().reportTimeframe;
 
-    const databaseRef = Firebase.database().ref(`${getState().uid}/hours`);
+    const databaseRef = Firebase
+        .database()
+        .ref(`${getState().uid}/hours`)
+        .orderByChild('startTime')
+        .startAt(
+            Moment()
+            .subtract(TIMEFRAME_LENGTH[timeframe], 'days')
+            .toJSON()
+        );
 
     try {
         const snapshot = yield apply(databaseRef, databaseRef.once, ['value']);
@@ -87,6 +103,7 @@ function* punchTime(getState, action) {
         hoursDbRef.off();
 
         yield put(Async.requestPunchTime(REQUEST_STATUS.SUCCESS));
+        yield put(Async.requestTimeSheets());
     } catch (error) {
         console.log(error);
         yield put(Async.requestPunchTime(REQUEST_STATUS.ERROR, {error}));
