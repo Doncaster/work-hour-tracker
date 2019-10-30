@@ -14,5 +14,5 @@ npm install
 ```
 npm run start
 npm run build
-npm run build-prod
+npm run build:prod
 ```

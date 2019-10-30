@@ -102,6 +102,6 @@ module.exports = function(env) {
             inline: true
         },
         devtool: 'inline-source-map'
-        // mode: !isProd ? 'development' : null
+        // mode: isProd ? 'production' : 'development'
     };
 }
