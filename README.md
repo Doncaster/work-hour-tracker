@@ -13,5 +13,6 @@ npm install
 #### Running
 ```
 npm run start
-npm run build [-- --prod]
+npm run build
+npm run build-prod
 ```

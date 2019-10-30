@@ -1,10 +1,11 @@
 {
   "name": "work-hour-tracker",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "scripts": {
     "build": "rm -rf build && webpack",
-    "start": "webpack-dev-server --hot",
+    "build-prod": "rm -rf build && webpack --env.prod",
+    "start": "webpack-dev-server --open",
     "test": "karma start"
   },
   "devDependencies": {
@@ -35,9 +36,8 @@
     "redux-mock-store": "^1.2.1",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
-    "webpack": "1.14.0",
-    "webpack-dev-server": "^1.16.2",
-    "yargs": "^6.5.0"
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.11.3"
   },
   "dependencies": {
     "babel-polyfill": "^6.23.0",
