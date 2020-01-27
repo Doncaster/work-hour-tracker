@@ -2,6 +2,8 @@ import { CLEAR_TIME_SHEETS, TOGGLE_SELECTED_TIME_SHEET } from '../Actions';
 import { REQUEST_TIME_SHEETS, REQUEST_STATUS, REMOVE_TIME_SHEET } from '../Actions/Async';
 
 const parseTimeSheets = timeSheets =>
+    !timeSheets ?
+    [] :
     Object
         .keys(timeSheets)
         .reduce(
@@ -30,6 +32,7 @@ export const timeSheets = (state = [], action) => {
             return [];
         case REQUEST_TIME_SHEETS:
             if (action.status === REQUEST_STATUS.SUCCESS) {
+                console.log('testing!');
                 return parseTimeSheets(action.timeSheets).map(current => timeSheet(current, action));
             } else if (action.status === REQUEST_STATUS.ERROR) {
                 console.error(action.error);
