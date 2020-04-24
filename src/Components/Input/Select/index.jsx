@@ -47,7 +47,8 @@ export default class Select extends React.Component {
                 <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
                     {values.map(value => (
                         <li key={value.value}>
-                            <a href="#" onClick={() => this.onValueClick(value.value)}>{value.name}</a>
+                            { /* eslint-disable-next-line */ }
+                            <a onClick={() => this.onValueClick(value.value)}>{value.name}</a>
                         </li>
                     ))}
                 </ul>

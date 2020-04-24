@@ -3,7 +3,6 @@ import Moment from 'moment';
 import {timeSheets} from './timeSheets';
 import {uid} from './userInfo';
 import {CHANGE_VIEW, REPORT_FORM_CHANGED, CLEAR_REPORT_FORM, CHANGE_REPORT_TIMEFRAME} from '../Actions';
-import {REPORT_TIMEFRAME_SELECTIONS} from '../constants';
 
 let onGoingRequests = 0;
 

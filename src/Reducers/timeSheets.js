@@ -37,6 +37,7 @@ export const timeSheets = (state = [], action) => {
                 console.error(action.error);
                 return state;
             }
+            return state;
         case TOGGLE_SELECTED_TIME_SHEET:
             return state.map(current => timeSheet(current, action));
         case REMOVE_TIME_SHEET:
