@@ -28,3 +28,5 @@ yarn-error.log*
 firebase.json
 firebase.config.json
 database.rules.json
+
+.env

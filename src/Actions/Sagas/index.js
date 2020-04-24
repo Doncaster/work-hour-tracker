@@ -1,17 +1,10 @@
-import Firebase from 'firebase/app';
+import * as Firebase from "firebase/app";
 import { all, apply, put, takeEvery, takeLatest } from 'redux-saga/effects';
-import Moment from 'moment';
 import Async, {
     REQUEST_STATUS, REQUEST_USER_INFO, REQUEST_TIME_SHEETS,
     REMOVE_TIME_SHEET, SAVE_REPORT_FORM, PUNCH_TIME } from '../Async';
 import { clearTimeSheets, clearReportForm } from '../index';
 import dbMigrations from './dbMigrations';
-
-const TIMEFRAME_LENGTH = {
-    ONE_MONTH: 30,
-    SIX_MONTHS: 180,
-    ONE_YEAR: 365
-}
 
 function* fetchUserInfo() {
     try {

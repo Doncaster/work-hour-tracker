@@ -6,6 +6,7 @@ const handleUserInfoRequest = (status, uid, error) => {
             return uid;
         case REQUEST_STATUS.ERROR:
             console.error(error);
+            return null;
         default:
             return null;
     }

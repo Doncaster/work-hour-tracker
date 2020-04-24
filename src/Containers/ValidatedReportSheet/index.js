@@ -52,7 +52,7 @@ const getWorkingDayLength = (date) =>  Moment(date, 'YYYY/M/D').isBefore('2017-0
 
 const convertToNumber = value => {
     const normalizedValue = value ? value.replace(',', '.') : value;
-    return Number(normalizedValue) === NaN ? null : Number(normalizedValue);
+    return Number.isNaN(normalizedValue) ? null : Number(normalizedValue);
 }
 
 const mapStateToProps = (state) => {
