@@ -1,4 +1,5 @@
 import {combineReducers} from 'redux';
+import Moment from 'moment';
 import {timeSheets} from './timeSheets';
 import {uid} from './userInfo';
 import {CHANGE_VIEW, REPORT_FORM_CHANGED, CLEAR_REPORT_FORM, CHANGE_REPORT_TIMEFRAME} from '../Actions';
@@ -35,10 +36,18 @@ const reportForm = (state = {}, action) => {
     }
 }
 
-const reportTimeframe = (state = REPORT_TIMEFRAME_SELECTIONS.ONE_MONTH, action) => {
+const defaultReportTimeframeState = {
+    start: Moment().subtract(1, 'months'),
+    end: Moment().endOf('day')
+};
+
+const reportTimeframe = (state = defaultReportTimeframeState, action) => {
     switch (action.type) {
         case CHANGE_REPORT_TIMEFRAME:
-            return action.value;
+            return {
+                start: action.start,
+                end: action.end
+            }
         default:
             return state;
     }

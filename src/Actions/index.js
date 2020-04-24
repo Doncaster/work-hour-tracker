@@ -50,3 +50,11 @@ export const clearReportForm = () => {
         type: CLEAR_REPORT_FORM
     }
 }
+
+export const changeReportTimeframe = (start, end) => {
+    return {
+        type: CHANGE_REPORT_TIMEFRAME,
+        start,
+        end
+    }
+}

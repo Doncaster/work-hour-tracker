@@ -33,11 +33,8 @@ function* fetchTimeSheets(getState) {
         .database()
         .ref(`${getState().uid}/hours`)
         .orderByChild('startTime')
-        .startAt(
-            Moment()
-            .subtract(TIMEFRAME_LENGTH[timeframe], 'days')
-            .toJSON()
-        );
+        .startAt(timeframe.start.toJSON())
+        .endAt(timeframe.end.toJSON())
 
     try {
         const snapshot = yield apply(databaseRef, databaseRef.once, ['value']);

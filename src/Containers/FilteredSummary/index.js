@@ -3,10 +3,10 @@ import Summary from '../../Components/Summary';
 import _reduce from 'lodash/reduce';
 import Moment from 'moment';
 
-import {toggleSelectedTimeSheet, removeTimeSheet} from '../../Actions';
+import {toggleSelectedTimeSheet, removeTimeSheet, changeReportTimeframe, fetchTimeSheets} from '../../Actions';
 
 const mapStateToProps = (state) => {
-    const timeSheets = state.timeSheets.map(current => {
+    const timeSheets = state.timeSheets ? state.timeSheets.map(current => {
         const targetInMinutes = (current.target || 0) * 60;
         const outOfOfficeInMinutes = (current.outOfOffice || 0) * 60;
 
@@ -21,7 +21,7 @@ const mapStateToProps = (state) => {
         hourReport.difference = hourReport.end.diff(hourReport.start, "minutes") - targetInMinutes - outOfOfficeInMinutes;
 
         return hourReport;
-    });
+    }) : [];
 
     return {
         timeSheets,
@@ -32,7 +32,11 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onRowClicked: key => dispatch(toggleSelectedTimeSheet(key)),
-        onRemoveRow: key => dispatch(removeTimeSheet(key))
+        onRemoveRow: key => dispatch(removeTimeSheet(key)),
+        onTimeframeChanged: (start, end) => {
+            dispatch(changeReportTimeframe(start, end));
+            dispatch(fetchTimeSheets());
+        }
     }
 }
 
