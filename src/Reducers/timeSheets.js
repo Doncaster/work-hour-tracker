@@ -2,6 +2,8 @@ import { CLEAR_TIME_SHEETS, TOGGLE_SELECTED_TIME_SHEET } from '../Actions';
 import { REQUEST_TIME_SHEETS, REQUEST_STATUS, REMOVE_TIME_SHEET } from '../Actions/Async';
 
 const parseTimeSheets = timeSheets =>
+    !timeSheets ?
+    [] :
     Object
         .keys(timeSheets)
         .reduce(
